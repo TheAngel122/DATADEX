@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente Pokémon | Pokédex Pro</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ef4444">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+        <article id="content">
+            <div class="loader">Accediendo a los archivos de la Liga...</div>
+        </article>
+    </main>
+
+    <aside class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="window.cerrarModal()">&times;</button>
+            <header>
+                <h3 id="modalTitle">Información</h3>
+            </header>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
+            <section>
+                <p id="modalDesc" style="color: var(--text-light); font-size: 0.9rem; line-height: 1.6;">
+                    Cargando descripción detallada...
+                </p>
+            </section>
+        </div>
+    </aside>
+
+    <script src="pokemon-detail.js"></script>
+    
+    <script>
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                window.cerrarModal();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* --- 1. VARIABLES Y RESETEO BASE --- */
+:root {
+  --bg: #f1f5f9; /* Gris muy claro de fondo */
+  --white: #ffffff;
+  --text-dark: #0f172a; /* Casi negro */
+  --text-light: #64748b; /* Gris para descripciones */
+  --primary: #ef4444; /* Rojo Pokédex */
+  --border: #e2e8f0;
+  --type-color: #94a3b8; /* Gris por defecto, cambia por JS */
+  --type-bg: rgba(148, 163, 184, 0.1); /* Fondo claro del tipo */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+  font-family: 'Plus Jakarta Sans', sans-serif; 
+  background: var(--bg); 
+  color: var(--text-dark); 
+  line-height: 1.5;
+}
+
+.app-container { max-width: 1100px; margin: 0 auto; padding: 20px; width: 100%; }
+.capitalize { text-transform: capitalize; }
+.center { text-align: center; }
+.pointer { cursor: pointer; }
+
+/* --- 2. HEADER Y BARRA DE FILTROS (INDEX) --- */
+.main-header {
+  background: var(--white);
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.main-header h1 { font-weight: 800; letter-spacing: -1px; font-size: 1.8rem; }
+.main-header span { color: var(--primary); }
+
+.filter-bar {
+  display: grid; 
+  grid-template-columns: 2fr 1fr; /* Búsqueda más ancha que filtros */
+  gap: 15px; 
+  margin: 2rem 0;
+  align-items: center;
+}
+.select-group { display: flex; gap: 10px; }
+
+input, select {
+  width: 100%; 
+  padding: 12px 16px; 
+  border-radius: 12px;
+  border: 2px solid var(--border); 
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: 0.3s; 
+  outline: none;
+  background: var(--white);
+}
+input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
+
+/* --- 3. GRID DE POKÉMON (INDEX) - CORREGIDO TAMAÑOS --- */
+.pokemon-grid {
+  display: grid; 
+  /* Asegura que las tarjetas no se estiren demasiado ni sean muy pequeñas */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 25px;
+  padding-bottom: 40px;
+}
+
+.pokemon-card {
+  background: var(--white); 
+  border-radius: 24px; 
+  padding: 30px 20px; /* Más aire arriba y abajo */
+  text-align: center; 
+  position: relative; 
+  border: 1px solid var(--border);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%; /* Para que todas midan lo mismo en la fila */
+}
+
+/* Efecto Rayo de Brillo al pasar el ratón */
+.pokemon-card::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+  transform: skewX(-25deg); transition: 0.5s;
+}
+.pokemon-card:hover::after { left: 120%; }
+
+.pokemon-card:hover { 
+  transform: translateY(-8px); 
+  box-shadow: var(--shadow-md); 
+  border-color: var(--primary); 
+}
+
+.id-badge {
+  position: absolute; top: 15px; left: 15px; 
+  background: var(--bg); padding: 4px 8px; 
+  border-radius: 8px; font-size: 0.7rem; font-weight: 800;
+  color: var(--text-light);
+}
+.img-wrapper {
+  margin: 15px 0;
+  display: flex; align-items: center; justify-content: center;
+  height: 150px; /* Altura fija para la zona de imagen */
+}
+.img-wrapper img { max-width: 140px; max-height: 140px; object-fit: contain; }
+
+.pokemon-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
+.card-footer { font-size: 0.7rem; font-weight: 800; color: var(--text-light); margin-top: auto; }
+
+/* --- 4. FICHA DETALLE (DETALLE) - CORREGIDO DISTRIBUCIÓN --- */
+.detail-card {
+  background: var(--white); border-radius: 32px; overflow: hidden;
+  box-shadow: var(--shadow-md); border: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+/* Sección Hero: Imagen vs Info */
+.hero-section { 
+  display: flex; 
+  border-bottom: 1px solid var(--border); 
+  flex-wrap: wrap; /* Para responsive */
+}
+
+/* Lado Izquierdo: Imagen y Botones */
+.visual-side {
+  flex: 1; /* Ocupa espacio proporcional */
+  min-width: 300px; /* Mínimo para que no se aplaste */
+  background: var(--type-bg); padding: 50px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; border-right: 1px solid var(--border);
+}
+
+/* Animación de flotado para el Pokémon principal */
+#pokemonImg { 
+  width: 100%; max-width: 300px; 
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+  animation: floating 3s ease-in-out infinite;
+  object-fit: contain;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Botones de acción (Shiny y Sonido) - CORREGIDO POSICIÓN */
+.visual-side button {
+  position: absolute; width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--white);
+  cursor: pointer; transition: 0.2s; font-size: 1.3rem; 
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm); z-index: 10;
+}
+.visual-side button:hover { transform: scale(1.1); background: var(--bg); border-color: var(--text-light); }
+#shinyBtn { top: 25px; right: 25px; }
+#soundBtn { bottom: 25px; right: 25px; }
+
+/* Lado Derecho: Info Básica y Descripción */
+.info-side { 
+  flex: 1.2; /* Ligeramente más ancho que la imagen */
+  padding: 50px; 
+  position: relative; 
+  min-width: 300px;
+}
+.back-btn { 
+  position: absolute; top: 25px; right: 25px; 
+  font-size: 0.7rem; font-weight: 800; padding: 8px 16px; 
+  border: 1px solid var(--border); border-radius: 10px; 
+  text-decoration: none; color: var(--text-light); transition: 0.2s;
+}
+.back-btn:hover { background: var(--bg); color: var(--text-dark); }
+
+.info-side h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+
+.description {
+  margin: 25px 0; padding-left: 20px; 
+  border-left: 4px solid var(--type-color);
+  color: var(--text-light); font-style: italic; font-size: 0.95rem;
+}
+
+/* --- 5. DETALLES TÉCNICOS (STATS, HABILIDADES, EFICACIA) --- */
+.details-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; /* Dos columnas perfectas */
+  gap: 40px; padding: 40px; 
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label { 
+  display: block; font-size: 0.75rem; font-weight: 800; 
+  color: var(--text-light); text-transform: uppercase; margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Chips y Movimientos */
+.chip-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+.type-chip { padding: 8px 16px; border-radius: 20px; color: white; font-size: 0.8rem; font-weight: 700; border: none; }
+
+.moves-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.move-card {
+  padding: 12px; border-radius: 12px; color: white; 
+  font-size: 0.8rem; font-weight: 700; text-align: center; 
+  cursor: pointer; transition: 0.2s; border: none;
+}
+.move-card:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: var(--shadow-sm); }
+
+/* Sección Eficacia de Tipos */
+.efficacy-section { padding: 40px; background: #fafafa; border-bottom: 1px solid var(--border); }
+.efficacy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.efficacy-title { font-size: 0.75rem; font-weight: 800; margin-bottom: 15px; display: block; text-transform: uppercase; }
+.text-danger { color: #ef4444; } .text-success { color: #22c55e; }
+.efficacy-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.type-badge {
+  display: flex; align-items: center; padding: 6px 12px; border-radius: 12px;
+  color: white; font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+}
+.multiplier { background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 6px; margin-left: 8px; font-family: monospace; }
+
+/* --- 6. EVOLUCIONES (ESTILO CARD MINI) --- */
+.evolution-section { padding: 40px; background: var(--bg); }
+.evo-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; align-items: center; }
+
+/* Flecha entre evoluciones (Opcional, añade un estilo visual) */
+.evo-container > div:not(:last-child)::after {
+  content: '→'; margin-left: 20px; color: var(--text-light); font-size: 1.5rem; font-weight: 800;
+}
+
+.evo-item { 
+  background: var(--white); border: 1px solid var(--border); border-radius: 24px; 
+  padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; 
+  min-width: 140px; display: flex; flex-direction: column; align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+.evo-item:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow-md); }
+.evo-item.current { border: 3px solid var(--type-color); transform: scale(1.05); background: var(--white); cursor: default; }
+
+.evo-img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px; }
+.evo-item div { font-size: 0.8rem; font-weight: 800; text-transform: capitalize; color: var(--text-dark); }
+
+/* --- 7. MODAL --- */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); /* Azul oscuro traslúcido */
+  backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px;
+}
+.modal-content {
+  background: var(--white); padding: 40px; border-radius: 28px;
+  max-width: 450px; width: 100%; position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  animation: modalIn 0.3s ease-out;
+}
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.8rem; border: none; background: none; cursor: pointer; color: var(--text-light); transition: 0.2s; }
+.close-modal:hover { color: var(--primary); transform: rotate(90deg); }
+
+.modal-content h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; color: var(--type-color); }
+.modal-content p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; margin-top: 15px; }
+
+/* --- 8. CARGADORES Y RESPONSIVE FUNDAMENTAL --- */
+.loader { text-align: center; padding: 50px; font-weight: 800; color: var(--text-light); font-size: 0.9rem; grid-column: 1 / -1; }
+
+@media (max-width: 900px) {
+  .details-grid, .efficacy-grid { grid-template-columns: 1fr; gap: 30px; }
+  .filter-bar { grid-template-columns: 1fr; }
+  .select-group { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  .hero-section { flex-direction: column; }
+  .visual-side { border-right: none; border-bottom: 1px solid var(--border); padding: 30px; }
+  .visual-side img { max-width: 200px; }
+  .info-side { padding: 30px; padding-top: 60px; } /* Espacio para el botón volver */
+  .back-btn { top: 15px; right: 15px; }
+  .info-side h2 { font-size: 1.8rem; }
+  .details-grid { padding: 20px; }
+}

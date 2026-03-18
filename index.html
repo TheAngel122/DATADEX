@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datadex | Inicio</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ef4444">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="app-container">
+            <h1>DATA<span>DEX</span></h1>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="filter-bar">
+            <input type="text" id="buscador" placeholder="Buscar por nombre o ID...">
+            
+            <div class="select-group">
+                <select id="filtro-tipo">
+                    <option value="todos">Todos los Tipos</option>
+                    <option value="fire">Fuego</option>
+                    <option value="water">Agua</option>
+                    <option value="grass">Planta</option>
+                    <option value="electric">Eléctrico</option>
+                    <option value="ice">Hielo</option>
+                    <option value="fighting">Lucha</option>
+                    <option value="poison">Veneno</option>
+                    <option value="ground">Tierra</option>
+                    <option value="flying">Volador</option>
+                    <option value="psychic">Psíquico</option>
+                    <option value="bug">Bicho</option>
+                    <option value="rock">Roca</option>
+                    <option value="ghost">Fantasma</option>
+                    <option value="dragon">Dragón</option>
+                    <option value="dark">Siniestro</option>
+                    <option value="steel">Acero</option>
+                    <option value="fairy">Hada</option>
+                    <option value="normal">Normal</option>
+                </select>
+
+                <select id="orden">
+                    <option value="id">Nº Pokedex</option>
+                    <option value="nombre">A - Z</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="pokemon-grid" id="resultado">
+            <div class="loader">Conectando con el servidor de la Liga Pokémon...</div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
