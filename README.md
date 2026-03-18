@@ -1,6 +1,6 @@
 # 🔴 DATADEX | Pro Pokémon Encyclopedia
 
-![GitHub License](https://img.shields.io/github/license/TU_USUARIO/DATADEX?color=red)
+![GitHub License](https://img.shields.io/github/license/TheAngel122/DATADEX?color=red)
 ![JS](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)
 ![CSS3](https://img.shields.io/badge/CSS3-Modern-blue?logo=css3)
 ![API](https://img.shields.io/badge/Data-PokéAPI-ef4444)
