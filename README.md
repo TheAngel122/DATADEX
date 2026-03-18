@@ -1,9 +1,9 @@
 # 🔴 DATADEX | Pro Pokémon Encyclopedia
 
-![GitHub License](https://img.shields.io/github/license/TheAngel122/DATADEX?color=red)
-![JS](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)
-![CSS3](https://img.shields.io/badge/CSS3-Modern-blue?logo=css3)
-![API](https://img.shields.io/badge/Data-PokéAPI-ef4444)
+[![GitHub License](https://img.shields.io/github/license/TheAngel122/DATADEX?color=red)](https://github.com/TheAngel122/DATADEX/blob/main/LICENSE)
+[![JS](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![CSS3](https://img.shields.io/badge/CSS3-Modern-blue?logo=css3)](https://developer.mozilla.org/es/docs/Web/CSS)
+[![API](https://img.shields.io/badge/Data-PokéAPI-ef4444)](https://pokeapi.co/)
 
 **DATADEX** es una enciclopedia interactiva de alto rendimiento diseñada para entrenadores y entusiastas. Utiliza **Vanilla JavaScript** para gestionar datos de más de 1000 criaturas en tiempo real, ofreciendo una experiencia de usuario fluida y visualmente impactante.
 
